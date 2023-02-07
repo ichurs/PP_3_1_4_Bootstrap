@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+<h1>Users</h1>
+<div>
+    <table border="1">
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Lastname</th>
+        </tr>
+
+        <tr th:each="user: ${user}">
+            <td th:utext="${user.getUsername()}"></td>
+            <td th:utext="${user.getName()}"></td>
+            <td th:utext="${user.getLastname()}"></td>
+        </tr>
+    </table>
+    <br/>
+    <a href="/logout">Logout</a>
+</div>
+</body>
+</html>
