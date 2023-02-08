@@ -10,28 +10,28 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "User")
-@Table(name = "users")
+@Table
 public class User implements Serializable, UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column
     private Long id;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "lastname")
+    @Column
     private String lastname;
 
-    @Column(name = "username")
+    @Column
     private String username;
 
-    @Column(name = "password")
+    @Column
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id")
+    @JoinColumn
     private Set<Role> roles;
 
     public Long getId() {

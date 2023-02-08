@@ -7,15 +7,15 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "roles")
+@Table
 public class Role implements GrantedAuthority, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_id")
+    @Column
     private Long id;
 
-    @Column(name = "role_name")
+    @Column
     private String name;
 
     public Role() {
