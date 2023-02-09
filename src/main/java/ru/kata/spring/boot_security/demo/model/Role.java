@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -7,19 +8,22 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "roles")
 public class Role implements GrantedAuthority, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(name = "role_id")
     private Long id;
 
-    @Column
+    @Column(name = "role_name")
     private String name;
 
     public Role() {
     }
+
+    @ManyToMany(mappedBy = "roles")
+    Set<User> setRoles;
 
     public Role(String name) {
         this.name = name;

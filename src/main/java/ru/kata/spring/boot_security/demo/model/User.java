@@ -9,29 +9,32 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity(name = "User")
-@Table
+@Entity
+@Table(name = "users")
 public class User implements Serializable, UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id")
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "lastname")
     private String lastname;
 
-    @Column
+    @Column(name = "username")
     private String username;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn
+    @ManyToMany
+    @JoinTable(name = "role",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
+    )
     private Set<Role> roles;
 
     public Long getId() {
