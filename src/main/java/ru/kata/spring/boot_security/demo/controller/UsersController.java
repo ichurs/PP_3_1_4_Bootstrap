@@ -17,7 +17,7 @@ import java.util.Set;
 
 
 @Controller
-@RequestMapping()
+@RequestMapping
 public class UsersController {
 
     private final UsersService usersService;
@@ -31,7 +31,7 @@ public class UsersController {
 
     @GetMapping("/registration")
     public String registrationPage(@ModelAttribute("user") User user) {
-        return "registration_user";
+        return "registration";
     }
 
     @PostMapping("/registration")
@@ -52,6 +52,6 @@ public class UsersController {
     public String getUserPage(Model model, Principal principal) {
         Long id = usersService.getUserByUsername(principal.getName()).getId();
         model.addAttribute("user", usersService.getUserById(id));
-        return "show_user";
+        return "user";
     }
 }

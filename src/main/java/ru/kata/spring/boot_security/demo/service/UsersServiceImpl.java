@@ -48,7 +48,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
         if (userById.isPresent()) {
             return userById.get();
         } else {
-            throw new UsernameNotFoundException(String.format("User with %s not found", id));
+            throw new UsernameNotFoundException(String.format("User with id %s not found", id));
         }
     }
 
@@ -59,18 +59,8 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
 
     @Transactional
     @Override
-    public void updateUser(Long id, User user) {
-        Optional<User> userBuId = userRepository.findById(id);
-        if (userBuId.isPresent()) {
-            User userFromRepo = userBuId.get();
-            userFromRepo.setId(id);
-            userFromRepo.setUsername(user.getUsername());
-            userFromRepo.setName(user.getName());
-            userFromRepo.setLastname(user.getLastname());
-            userRepository.save(userFromRepo);
-        } else {
-            throw new UsernameNotFoundException(String.format("User %s with %s not found", user, id));
-        }
+    public void updateUser(User updatedUser) {
+        userRepository.save(updatedUser);
     }
 
     @Transactional

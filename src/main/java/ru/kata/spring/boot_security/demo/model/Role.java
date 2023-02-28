@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "roles")
 public class Role implements GrantedAuthority, Serializable {
 
     @Id
@@ -23,7 +22,7 @@ public class Role implements GrantedAuthority, Serializable {
     }
 
     @ManyToMany(mappedBy = "roles")
-    Set<User> setRoles;
+    private Set<User> users;
 
     public Role(String name) {
         this.name = name;
