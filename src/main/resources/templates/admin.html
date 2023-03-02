@@ -29,7 +29,7 @@
                 <div th:each="role:${user.getRoles()}">[[${role.getName()}]]</div>
             </td>
             <td>
-                <a th:href="@{/admin/{id}/edit(id=${user.getId()})}">
+                <a th:href="@{/admin/edit/{id}(id=${user.getId()})}">
                     <input type="submit" value="Edit user"/>
                 </a>
                 <form th:method="DELETE" th:action="@{/admin/{id}/delete(id=${user.getId()})}">

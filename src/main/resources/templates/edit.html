@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:method="patch" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
+<form th:method="PATCH" th:action="@{/admin/edit/{id}(id=${user.id})}" th:object="${user}">
 
     <label for="username">Enter username:</label>
     <input type="text" th:field="*{username}" id="username"/>
@@ -26,10 +26,14 @@
     <br/>
     Enter role:
     <br/>
-    <select multiple name="stringRole" id="stringRole">
-        <option>ROLE_USER</option>
-        <option>ROLE_ADMIN</option>
-    </select>
+    <label>Roles:
+        <input type="checkbox" name="roles"
+               th:each="role : ${roles}"
+               th:text="${role.authority}"
+               th:value="${role.id}"
+               th:field="*{roles}"
+        />
+    </label>
     <br/>
     <input type="submit" value="Update"/>
 </form>

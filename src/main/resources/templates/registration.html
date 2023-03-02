@@ -11,11 +11,14 @@
     <input type="text" th:field="*{username}" id="username"/>
     <div style="color:skyblue" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
     <br/>
+    <br/>
     <label for="name">Enter name:</label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
+    <br/>
     <label for="lastname">Enter lastname:</label>
     <input type="text" th:field="*{lastname}" id="lastname"/>
+    <br/>
     <br/>
     <label for="password">Enter password:</label>
     <input type="password" th:field="*{password}" id="password"/>

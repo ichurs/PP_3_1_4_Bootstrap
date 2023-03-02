@@ -59,7 +59,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
 
     @Transactional
     @Override
-    public void updateUser(User updatedUser) {
+    public void updateUser(User updatedUser, Long id) {
         userRepository.save(updatedUser);
     }
 
