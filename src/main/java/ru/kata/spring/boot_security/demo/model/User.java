@@ -17,10 +17,13 @@ public class User implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "lastname")
     private String lastname;
 
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")

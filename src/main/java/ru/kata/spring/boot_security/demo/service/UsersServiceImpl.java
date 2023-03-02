@@ -60,6 +60,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     @Transactional
     @Override
     public void updateUser(User updatedUser, Long id) {
+        updatedUser.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
         userRepository.save(updatedUser);
     }
 
@@ -68,21 +69,20 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
         userRepository.deleteById(id);
     }
 
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+    }
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = getUserByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User %s not found", username));
+        } else {
+            mapRolesToAuthorities(user.getRoles()); // эта строка необходима чтобы избежать LazyInitializationException
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                mapRolesToAuthorities(user.getRoles()));
-
+        return user;
     }
-
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
-    }
-
-
 }

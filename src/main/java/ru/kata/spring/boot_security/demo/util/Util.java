@@ -35,6 +35,5 @@ public class Util {
         roleService.saveRole(roleUser);
         User user = new User("user","user", "user", "user", Set.of(roleUser));
         usersService.saveUser(user);
-
     }
 }

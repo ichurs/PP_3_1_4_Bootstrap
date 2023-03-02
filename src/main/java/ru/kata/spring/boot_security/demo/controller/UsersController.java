@@ -17,7 +17,6 @@ import java.util.Set;
 
 
 @Controller
-@RequestMapping
 public class UsersController {
 
     private final UsersService usersService;
@@ -27,20 +26,6 @@ public class UsersController {
     public UsersController(UsersService usersService, RoleService roleService) {
         this.usersService = usersService;
         this.roleService = roleService;
-    }
-
-    @GetMapping("/registration")
-    public String registrationPage(@ModelAttribute("user") User user) {
-        return "registration";
-    }
-
-    @PostMapping("/registration")
-    public String performRegistration(@ModelAttribute("user") User user) {
-        Role role = new Role("ROLE_USER");
-        roleService.saveRole(role);
-        user.setRoles(Set.of(role));
-        usersService.saveUser(user);
-        return "redirect:/login";
     }
 
     @GetMapping("/login")

@@ -10,5 +10,4 @@ public interface RoleService {
 
     void saveRole(Role roleAdmin);
 
-    void removeRoleById(Long id);
 }

@@ -21,14 +21,11 @@ public class AdminController {
 
     private final UsersService usersService;
     private final RoleService roleService;
-    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public AdminController(UsersService usersService, RoleService roleService,
-                           BCryptPasswordEncoder passwordEncoder) {
+    public AdminController(UsersService usersService, RoleService roleService) {
         this.usersService = usersService;
         this.roleService = roleService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -39,29 +36,24 @@ public class AdminController {
 
     @GetMapping("/new")
     public String getUserCreateForm(Model model) {
-        User user = new User();
-        List<Role> roles = roleService.getRoles();
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roles);
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", roleService.getRoles());
         return "new";
     }
 
     @PostMapping("/createNew")
     public String createUser(ModelMap model, @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            List<Role> roles = roleService.getRoles();
-            model.addAttribute("roles", roles);
+            model.addAttribute("roles", roleService.getRoles());
             return "new";
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersService.saveUser(user);
         return "redirect:/admin";
     }
 
     @GetMapping(value = "edit/{id}")
     public String editUser(@PathVariable("id") Long id, Model model) {
-        User user = usersService.getUserById(id);
-        model.addAttribute("user", user);
+        model.addAttribute("user", usersService.getUserById(id));
         model.addAttribute("roles", roleService.getRoles());
         return "edit";
     }
@@ -70,11 +62,9 @@ public class AdminController {
     public String updateUser(ModelMap model, @ModelAttribute("user") @Valid User user, BindingResult bindingResult,
                              @PathVariable("id") Long id) {
         if (bindingResult.hasErrors()) {
-            List<Role> roles = roleService.getRoles();
-            model.addAttribute("roles", roles);
+            model.addAttribute("roles", roleService.getRoles());
             return "edit";
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersService.updateUser(user, id);
         return "redirect:/admin";
     }
