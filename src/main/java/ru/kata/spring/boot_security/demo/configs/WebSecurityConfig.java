@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -41,7 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                 //Доступ разрешен всем пользователей
                 .antMatchers("/").permitAll()
-                .antMatchers("/registration").permitAll()
                 .antMatchers("/login").permitAll()
 
                 //Все остальные страницы требуют аутентификации
@@ -49,12 +49,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //Настройка для входа в систему
                 .formLogin().successHandler(successUserHandler)
-                //Перенарпавление на главную страницу после успешного входа
-
+                .loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll()
+                .logoutRequestMatcher((new AntPathRequestMatcher("/logout")))
                 .logoutSuccessUrl("/login")
                 .and().csrf().disable();
     }

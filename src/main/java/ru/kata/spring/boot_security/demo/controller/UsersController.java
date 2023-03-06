@@ -18,6 +18,11 @@ public class UsersController {
         this.usersService = usersService;
     }
 
+    @GetMapping("/")
+    public String redirect() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/login")
     public String loginPage() {
         return "login";
@@ -25,7 +30,8 @@ public class UsersController {
 
     @GetMapping("/user")
     public String getUserPage(Model model, Principal principal) {
-        model.addAttribute("user", usersService.getUserByUsername(principal.getName()));
+        model.addAttribute("authUser", usersService.getUserByUsername(principal.getName()));
+        model.addAttribute("authRoles", usersService.getUserByUsername(principal.getName()).getRoles());
         return "user";
     }
 }

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="spring-boot_security-demo" />
+        <module name="PP_3_1_4_Bootstrap" />
         <module name="PP_3_1_3_Boot_Security" />
       </profile>
     </annotationProcessing>
@@ -14,6 +15,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="PP_3_1_3_Boot_Security" options="-parameters" />
+      <module name="PP_3_1_4_Bootstrap" options="-parameters" />
       <module name="spring-boot_security-demo" options="-parameters" />
     </option>
   </component>
