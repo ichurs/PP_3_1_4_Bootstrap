@@ -140,10 +140,11 @@
 
                                                         <div class="modal-body text-center d-flex justify-content-center">
                                                             <form th:method="PATCH"
-                                                                  th:action="@{/admin/{id}/edit(id=${user.getId()})}"
+                                                                  th:action="@{/admin/{id}/edit(id=${user.id})}"
                                                                   th:with="editedUser = ${user}"
                                                                   th:object="${editedUser}"
                                                                   id="editModalForm">
+
                                                                 <div class="form-group mb-2">
                                                                     <label for="editModalUserId"
                                                                            class="form-label fw-bold">ID</label>
@@ -152,24 +153,24 @@
                                                                            th:value="${editedUser.id}"
                                                                            class="form-control"
                                                                            id="editModalUserId"
-                                                                           readonly>
+                                                                           readonly/>
                                                                 </div>
+
                                                                 <div class="form-group mb-2">
-                                                                    <label for="editModalFirstName"
+                                                                    <label for="editModalName"
                                                                            class="form-label fw-bold">Name</label>
                                                                     <input type="text"
-                                                                           name="firstName"
+                                                                           name="name"
                                                                            th:value="${editedUser.name}"
                                                                            class="form-control"
-                                                                           id="editModalFirstName"/>
+                                                                           id="editModalName"/>
                                                                 </div>
 
                                                                 <div class="form-group mb-2">
                                                                     <label for="editModalLastName"
-                                                                           class="form-label fw-bold">Last
-                                                                        name</label>
+                                                                           class="form-label fw-bold">Last name</label>
                                                                     <input type="text"
-                                                                           name="lastName"
+                                                                           name="lastname"
                                                                            th:value="${editedUser.lastname}"
                                                                            class="form-control "
                                                                            id="editModalLastName"/>
@@ -179,7 +180,7 @@
                                                                     <label for="editModalUsername"
                                                                            class="form-label fw-bold">Username</label>
                                                                     <input type="text"
-                                                                           name="email"
+                                                                           name="username"
                                                                            th:value="${editedUser.username}"
                                                                            class="form-control"
                                                                            id="editModalUsername" required/>
@@ -273,7 +274,7 @@
 
                                                                 <div class="form-group mb-2">
                                                                     <label for="deleteModalUsername"
-                                                                           class="form-label fw-bold">Email</label>
+                                                                           class="form-label fw-bold"> Username </label>
                                                                     <input type="text"
                                                                            th:value="${user.username}"
                                                                            class="form-control"
@@ -325,10 +326,10 @@
                                     <form th:method="POST" th:action="@{/admin}"
                                           th:object="${newUser}">
                                         <div class="form-group mb-2">
-                                            <label for="firstName" class="form-label fw-bold"> Name</label>
-                                            <input type="text" name="firstName" th:field="${newUser.name}"
+                                            <label for="name" class="form-label fw-bold"> Name</label>
+                                            <input type="text" name="name" th:field="${newUser.name}"
                                                    class="form-control"
-                                                   id="firstName" placeholder="Name"/>
+                                                   id="name" placeholder="Name"/>
                                         </div>
 
                                         <div class="form-group mb-2">
